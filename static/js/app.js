@@ -4,20 +4,43 @@ const url = "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/
 	// Fetch the JSON data, store and console log it
 d3.json(url).then(
 	function(data) {
-		let BBdata = data;
   		console.log(data);
 	}
 );
 
 // Create horizontal bar chart to display the top 10 OTUs found on the individual
 
-let trace1 = {
-	x: BBdata.samples.sample_values,
-	y: BBdata.samples.otu_ids,
-	type: "bar"
-};
 
-let barChart = [trace1];
+
+d3.json(url).then(
+	function(data) {
+		var sampleValues = []
+		var OTUs = []
+
+		for (let i = 0; i < data.samples.length; i++) {
+  			let row = data.samples.i
+			sampleValues.push(i.sample_values);
+			OTUs.push(i.otu_ids);
+		};
+
+  		console.log(sampleValues);
+  		console.log(OTUs);
+
+
+		let trace1 = {
+			x: sampleValues,
+			y: OTUs,
+			type: "bar"
+		};
+		let barChart = [trace1]
+
+		Plotly.newPlot("bar", barChart);
+
+		console.log("Bar Chart Printed")
+
+	}
+);
+
 
 	// Create a dropdown menu for individual samples
 
