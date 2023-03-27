@@ -9,9 +9,9 @@ function barChart(index) {
 
 	let trace1 = {
 		type: "bar",
-		x: BBdata.samples[index].sample_values.slice(0,10),
-		y: BBdata.samples[index].otu_ids.map(x => "OTU " + x).slice(0,10),
-		text: BBdata.samples[index].otu_labels.slice(0,10),
+		x: BBdata.samples[index].sample_values.slice(0,10).reverse(),
+		y: BBdata.samples[index].otu_ids.map(x => "OTU " + x).slice(0,10).reverse(),
+		text: BBdata.samples[index].otu_labels.slice(0,10).reverse(),
 		orientation: "h"
 	};
 
@@ -22,7 +22,6 @@ function barChart(index) {
 	console.log("Bar Chart Printed")
 	
 };
-
 
 
 // Create a function for a bubble chart that displays the selected individual's sample data
@@ -60,29 +59,26 @@ function bubbleChart(index) {
 // Create a function to display the metadata demographic info for each sample
 
 function metaDisplay(index) {
-	var metadata = BBdata.metadata[index].map((index) => ({
-			id: index.id, 
-			ethnicity: index.ethnicity,
-			gender: index.gender,
-			age: index.age,
-			location: index.location,
-			bbtype: index.bbtype,
-			wfreq: index.wfreq})
-			)
-
+	var subjMetadata = BBdata.metadata[index];
+	var panel = d3.select('#sample-metadata');
+	panel.html("");
+	var rowText;
+	console.log(subjMetadata);
+	Object.entries(subjMetadata).forEach(([key, value]) => {
+		rowText = `${key.toUpperCase()}: ${value}`;
+		panel.append('h6').text(rowText);
+	});
+	
 
 };
 
 
-
-
-// Update all plots when a new sample is selected
+// Function to update all plots when a new sample is selected
 
 function optionChanged(value) {
 	barChart(value)
 	bubbleChart(value)
 	metaDisplay(value)
-
 
 };
 
@@ -110,53 +106,12 @@ d3.json(url).then(
 		
 		};
 
-	// Create 
-
-		var metadata = data.metadata.map((x) => ({
-			id: x.id, 
-			ethnicity: x.ethnicity,
-			gender: x.gender,
-			age: x.age,
-			location: x.location,
-			bbtype: x.bbtype,
-			wfreq: x.wfreq}))
-
-		var metaDisplay = d3.select("#sample-metadata").data(metadata).enter().append("metadata")
-
-		metaDisplay.text(function(m) {
-			return m.id, 
-				m.ethnicity, 
-				m.gender,
-				m.age,
-				m.location,
-				m.bbtype,
-				m.freq
-		});
-
-		metaDisplay.attr("value", function(m) {
-			return m.id, 
-				m.ethnicity, 
-				m.gender,
-				m.age,
-				m.location,
-				m.bbtype,
-				m.freq
-		});
-		for (index = 0; index < data.metadata.length; index++) {
-
-		}
 
 // Run functions for charts and metadata population for individul sample selected in the dropdown
 
-		barChart(0)
-		bubbleChart(0)
+		optionChanged(0)
+	
 		
 	}
 );
 
-
-
-
-
-
-// Deploy app to GitHub Pages
