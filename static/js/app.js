@@ -56,6 +56,7 @@ function bubbleChart(index) {
 	
 };
 
+
 // Create a function to display the metadata demographic info for each sample
 
 function metaDisplay(index) {
@@ -79,7 +80,6 @@ function optionChanged(value) {
 	barChart(value)
 	bubbleChart(value)
 	metaDisplay(value)
-
 };
 
 // Generate dashboard
@@ -96,7 +96,7 @@ d3.json(url).then(
 
 		dropdown.text(function(o) {
 			return o.id
-		})
+		});
 
 		dropdown.attr("value", function(o) {
 			return o.index
