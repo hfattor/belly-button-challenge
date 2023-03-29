@@ -1,6 +1,6 @@
 # belly-button-challenge
 The JavaScript code in the Static folder generates a dashboard of data from the following dataset: 
-<blockquote>Hulcr, J. et al. (2012) A Jungle in There: Bacteria in Belly Buttons are Highly Diverse, but Predictable. Retrieved from: http://robdunnlab.com/projects/belly-button-biodiversity/results-and-data/</blockquote>
+<blockquote>Hulcr, J. et al. (2012) <em>A Jungle in There: Bacteria in Belly Buttons are Highly Diverse, but Predictable</em>. Retrieved from: http://robdunnlab.com/projects/belly-button-biodiversity/results-and-data/</blockquote>
 
 The dataset catalogs the microbes that colonize human navels. The microbial species are also known as operational taxonomic units, or OTUs, in the study. 
 
